@@ -39,9 +39,11 @@ public class Login {
            return "Username successfully captured";}
        
      else{
-           return "Username is not correctly formatted. please ensure that your username contains an underscore and is no more than five characters in length.";}
+           return "Username is not correctly formatted. please ensure that"
+                  + " your username contains an underscore and is no more than five characters in length.";}
         
     }
+
     
     public static String checkPasswordComplexity(String Password){
        
@@ -61,8 +63,9 @@ public class Login {
         HasLow = true;        
         }
         else {HasSpecial = true;} //Anything not letter or digit
-        
+    }
  
+        
         
         if(HasNum && HasCap && HasLow && HasSpecial && Password.length() >= 8){
              return "Password successfully captured";}
@@ -70,6 +73,6 @@ public class Login {
         return "Password is not correctly formatted;please ensure that the password contains at least eight characters,a captial letter , a number, and a special character";
              }
     }
-    
+        
     
 }
