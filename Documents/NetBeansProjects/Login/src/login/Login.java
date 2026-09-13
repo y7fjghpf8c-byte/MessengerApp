@@ -28,21 +28,47 @@ public class Login {
         
         //call checker method and print and print the message it returns
         System.out.print(checkUsername(Username));
+        System.out.print(checkPasswordComplexity(Password));
+        
         input.close();
     }
     
-    public static boolean checkUsername(String Username){
+    public static String checkUsername(String Username){
     
-       If( Username.contains("_") && Username.length() <= 5  ){
-    System.out.print("Username successfully captured");}
+       if( Username.contains("_") && Username.length() <= 5  ){
+           return "Username successfully captured";}
        
-     else{System.out.print("Username is not correctly formatted please ensure that your" +
-          "username contains an underscore and is no more than five characters in length.");}
-        return true;
+     else{
+           return "Username is not correctly formatted. please ensure that your username contains an underscore and is no more than five characters in length.";}
+        
     }
     
-    public static boolean PasswordComplexity(){
+    public static String checkPasswordComplexity(String Password){
+       
+    boolean HasNum = false , HasLow = false, HasCap = false, HasSpecial = false;
     
+    for(int i = 0; i < (Password.length()); i++){
+        char c = Password.charAt(i);
+    
+  
+        if(Character.isDigit(c)){
+            HasNum =true;
+        }
+        else if (Character.isUpperCase(c)){
+            HasCap = true;
+        }
+        else if(Character.isLowerCase(c)){
+        HasLow = true;        
+        }
+        else {HasSpecial = true;} //Anything not letter or digit
+        
+ 
+        
+        if(HasNum && HasCap && HasLow && HasSpecial && Password.length() >= 8){
+             return "Password successfully captured";}
+        else {
+        return "Password is not correctly formatted;please ensure that the password contains at least eight characters,a captial letter , a number, and a special character";
+             }
     }
     
     
