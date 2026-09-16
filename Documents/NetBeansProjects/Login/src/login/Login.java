@@ -10,7 +10,11 @@ import java.util.Scanner;
  * @author Makalabate Rampedi
  */
 public class Login {
-
+        //Store registered credentials
+    private static String registeredUsername;
+    private static String registeredPassword;
+    private static String firstName;
+    private static String lastName;
     /**
      * @param args the command line arguments
      */
@@ -29,6 +33,7 @@ public class Login {
         //call checker method and print and print the message it returns
         System.out.print(checkUsername(Username));
         System.out.print(checkPasswordComplexity(Password));
+        System.out.print(checkCellPhoneNumber(Cellphone));
         
         input.close();
     }
@@ -72,6 +77,12 @@ public class Login {
         else {
         return "Password is not correctly formatted;please ensure that the password contains at least eight characters,a captial letter , a number, and a special character";
              }
+    }
+    
+    public static String checkCellPhoneNumber(String Cellphone){
+            if(Cellphone.startsWith("+27") && Cellphone.length() == 12){
+            return "Cellphone number successfully added";}
+            else{ return "Cell phone number incorrectly formatted or does not contain international code.";}
     }
         
     
