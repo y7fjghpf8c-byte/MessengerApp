@@ -35,6 +35,8 @@ public class Login {
         System.out.print(checkPasswordComplexity(Password));
         System.out.print(checkCellPhoneNumber(Cellphone));
         
+        
+        
         input.close();
     }
     
@@ -54,7 +56,7 @@ public class Login {
        
     boolean HasNum = false , HasLow = false, HasCap = false, HasSpecial = false;
     
-    for(int i = 0; i < (Password.length()); i++){
+    for(int i = 0; i < Password.length(); i++){
         char c = Password.charAt(i);
     
   
@@ -84,6 +86,14 @@ public class Login {
             return "Cellphone number successfully added";}
             else{ return "Cell phone number incorrectly formatted or does not contain international code.";}
     }
+    
+    public static boolean loginUser(String Username, String Password){
+    return Username.equals(registeredUsername) && Password.equals(registeredPassword);}
+    
+    public static String returnLoginStatus(boolean loginSucccess){
+    if(loginSuccess){
+    return "Welcome" + firstName + "" + lastName + ", it is great to see you again.";}
+    else{ return "Username or password incorrect, please try again"; }}
         
     
 }
