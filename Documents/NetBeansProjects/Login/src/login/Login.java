@@ -5,6 +5,7 @@
 package login;
 import java.util.Scanner;
 
+
 /**
  *
  * @author Makalabate Rampedi
@@ -16,21 +17,23 @@ public class Login {
     private static String firstName;
     private static String lastName;
     private static String cellphone;
-    private static boolean loginSuccess;
+    private static boolean Success;
+    
+    //Condtructor
+public Login(String firstName, String lastName, String registeredUsername, String registeredPassword, String cellphone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.registeredUsername = registeredUsername;
+        this.registeredPassword = registeredPassword;
+        this.cellphone = cellphone;
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         
-        System.out.print("Enter Username:");
-        registeredUsername = input.nextLine();
-        
-        System.out.print("Enter Password:");
-        registeredPassword = input.nextLine();
-        
-        System.out.print("Enter South African Cellphone Number:");
-        cellphone = input.nextLine();
+        System.out.println("=== Registration ===");
         
         System.out.print("Enter First Name:");
         firstName = input.nextLine();
@@ -38,27 +41,38 @@ public class Login {
         System.out.print("Enter Last Name:");
         lastName = input.nextLine();
         
+        System.out.print("Enter Username:");
+        registeredUsername = input.nextLine();
+        
+        System.out.print("Enter Password:");
+        registeredPassword = input.nextLine();
+        
+        System.out.print("Enter South African Cellphone Number(+27):");
+        cellphone = input.nextLine();
+      
+        
+        
         //Registration feedback
-        System.out.print(registerUser());
+        Login user = new Login(firstName, lastName, registeredPassword,registeredUsername,   cellphone);
+        System.out.println(user.registerUser());
         
         
         //Login
         System.out.println("\n-- LOGIN ---");
         System.out.println("Enter Username: ");
         String loginUsername = input.nextLine();
-        
+      
         System.out.print("Enter Password: ");
         String loginPassword = input.nextLine();
         
-        boolean loginSuccess = loginUser(loginUsername, loginPassword);
-        System.out.println(returnLoginStatus(loginSuccess));
-        
+       boolean Success = user.loginUser(loginUsername, loginPassword);
+       System.out.println(user.returnLoginStatus(Success));
         
         
         input.close();
     }
     //Username Validation
-    public static boolean checkUsername(String username){
+    public boolean checkUsername(String username){
     
        return username.contains("_") && username.length() <= 5 ;
     
@@ -66,60 +80,53 @@ public class Login {
     }
 
     //Password Validation
-    public static boolean checkPasswordComplexity(String password){
+    public boolean checkPasswordComplexity(String password){
        
-    boolean hasNum = false ,  hasCap = false, hasSpecial = false;
-    
-    for(int i = 0; i < password.length(); i++){
-        char c = password.charAt(i);
-    
-  
-        if(Character.isDigit(c)){
-            hasNum =true;
-        }
-        else if (Character.isUpperCase(c)){
-            hasCap = true;
-        }
-        else if(Character.isLowerCase(c)){
-            hasSpecial = true;        
-        }
-    }
-    
-    return hasNum && hasCap && hasSpecial && password.length() >= 8;
-   
+        boolean hasUppercase = password.matches(".*[A-Z].*");
+        boolean hasNumber = password.matches(".*\\d.*");
+        boolean hasSpecialChar = password.matches(".*[!@#$%^&*(),.?\\\":{}|<>].*");
+        return password.length() >= 8 && hasUppercase && hasNumber && hasSpecialChar;
     }
     
     //Cellphone validation
-    public static boolean checkCellPhoneNumber(String Cellphone){
+    public  boolean checkCellPhoneNumber(String Cellphone){
         
-            return Cellphone.startsWith("+27") && Cellphone.length() == 12;
+            return Cellphone.matches("^\\+27\\d{9}$");
            
     }
     
-    //Registration method
-    public static String registerUser(){
+    //Registration 
+    public String registerUser(){
     if(!checkUsername(registeredUsername)){
         
     return "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five character in length.";}
     
-    if(!checkPasswordComplexity(registeredPassword)){
-        
+    else if(!checkPasswordComplexity(registeredPassword)){
+ 
         return "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.";}
-    if(!checkCellPhoneNumber(cellphone)){return "Cell phone number incorrectly formatted or does not contain international code.";}
     
-    return "User registered successfully.";
+    else if(!checkCellPhoneNumber(cellphone)){return "Cell phone number incorrectly formatted or does not contain international code.";}
+    
+    else{
+         
+          return " User registered successfully!";}
+   
     }
     
-    //Login method
-    public static boolean loginUser(String Username, String Password){
+    //Login 
+    public  boolean loginUser(String Username, String Password){
     return Username.equals(registeredUsername) && Password.equals(registeredPassword);}
     
     
     //Login Status message
-    public static String returnLoginStatus(boolean loginSucccess){
-    if(loginSuccess){
+    public  String returnLoginStatus(boolean Success){
+    if(Success){
     return "Welcome" + firstName + "" + lastName + ", it is great to see you again.";}
     else{ return "Username or password incorrect, please try again"; }}
+
+    public boolean checkUsername() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
         
     
 }
