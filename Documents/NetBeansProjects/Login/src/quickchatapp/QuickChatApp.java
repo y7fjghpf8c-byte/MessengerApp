@@ -5,6 +5,7 @@
 package quickchatapp;
 
 import java.util.Scanner;
+import Message.Message;
 
 /**
  *
@@ -61,10 +62,11 @@ public class QuickChatApp {
 
                         System.out.println(msg.checkRecipientCell());
                         System.out.println(msg.checkMessageLength());
-                        System.out.println(msg.sendMessage("send"));
+                        System.out.println(msg.SentMessage(1));
                         System.out.println(msg.printMessage());
 
                         sentCount++;
+                        
                     } else {
                         System.out.println("You have reached your message limit.");
                     }
@@ -83,6 +85,7 @@ public class QuickChatApp {
                     System.out.println("Invalid option.");
             }
         
-    }
+        }
     
+    }
 }
