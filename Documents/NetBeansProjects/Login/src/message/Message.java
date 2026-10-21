@@ -23,21 +23,12 @@ public Message(String checkRecipientCell, String messageText){
    this.messageID = generateRandomMessageID();
    this.recipientCell = recipientCell;
    this.messageText = messageText;
-   this.messageIndex = totalMessageSent;
+   this.messageIndex = totalMessagesSent;
    this.messageHash = createMessageHash();
-   totalMessageSent++;
+   totalMessagesSent++;
+   }
 
-}
-    
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        
-        // Generate random 10-digit ID
-        private String generateRandomMessageID(){
+   private String generateRandomMessageID(){
         Random rand = new Random();
         long num = (long)(rand.nextDouble() * 1_000_000_0000L);
         return String.format("%010d", num);
@@ -48,7 +39,7 @@ public Message(String checkRecipientCell, String messageText){
           return this.messageID != null && this.messageID.length() <= 10; }
         
         //Validate recipient cell
-        public boolean checkRecipientCell(){
+        public String checkRecipientCell(){
         if (recipientCell != null && recipientCell.startsWith("+") && recipientCell.length() <= 12)
         {return "Cell phone number successfully captured."; }
         
@@ -89,6 +80,25 @@ public Message(String checkRecipientCell, String messageText){
         
         public static int returnTotalMessages(){
         return totalMessagesSent; }
+        
+        public static void resetTotalMessagesSent(){
+          totalMessagesSent = 0;}
+        
+        public String getMessageID(){
+         return messageID;}
+    
+    
+   
+
+    
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        
+     
     }
     
    
