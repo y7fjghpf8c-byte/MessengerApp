@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package login;
+package Login;
 import java.util.Scanner;
 
 
@@ -10,22 +10,28 @@ import java.util.Scanner;
  *
  * @author Makalabate Rampedi
  */
-public class Login {
-        //Store registered credentials
-    private static String registeredUsername;
-    private static String registeredPassword;
-    private static String firstName;
-    private static String lastName;
-    private static String cellphone;
-    private static boolean Success;
+
     
     //Condtructor
-public Login(String firstName, String lastName, String registeredUsername, String registeredPassword, String cellphone) {
+public class Login {
+
+    private String userName;
+    private String password;
+    private String cellPhoneNumber;
+    private String firstName;
+    private String lastName;
+
+    public Login(String firstName,
+                 String lastName,
+                 String userName,
+                 String password,
+                 String cellPhoneNumber) {
+
         this.firstName = firstName;
         this.lastName = lastName;
-        this.registeredUsername = registeredUsername;
-        this.registeredPassword = registeredPassword;
-        this.cellphone = cellphone;
+        this.userName = userName;
+        this.password = password;
+        this.cellPhoneNumber = cellPhoneNumber;
     }
     /**
      * @param args the command line arguments
@@ -36,97 +42,139 @@ public Login(String firstName, String lastName, String registeredUsername, Strin
         System.out.println("=== Registration ===");
         
         System.out.print("Enter First Name:");
-        firstName = input.nextLine();
+        String firstName = input.nextLine();
         
         System.out.print("Enter Last Name:");
-        lastName = input.nextLine();
+        String lastName = input.nextLine();
         
         System.out.print("Enter Username:");
-        registeredUsername = input.nextLine();
+        String userName = input.nextLine();
         
         System.out.print("Enter Password:");
-        registeredPassword = input.nextLine();
+        String password = input.nextLine();
         
         System.out.print("Enter South African Cellphone Number(+27):");
-        cellphone = input.nextLine();
+        String cellPhoneNumber = input.nextLine();
       
+          //Registration feedback
+        Login user = new Login(
+        firstName,
+        lastName,
+        userName,
+        password,
+        cellPhoneNumber);
+        
+          System.out.println(user.registerUser());
+
+        if (!user.registerUser()
+                .equals("User successfully registered.")) {
+            input.close();
+            return;
+        }
         
         
         //Registration feedback
-        Login user = new Login(firstName, lastName, registeredPassword,registeredUsername,   cellphone);
-        System.out.println(user.registerUser());
+       
         
         
         //Login
-        System.out.println("\n-- LOGIN ---");
-        System.out.println("Enter Username: ");
+        
+        System.out.println("\n=== LOGIN ===");
+
+        System.out.print("Enter Username: ");
         String loginUsername = input.nextLine();
-      
+
         System.out.print("Enter Password: ");
         String loginPassword = input.nextLine();
-        
-       boolean Success = user.loginUser(loginUsername, loginPassword);
-       System.out.println(user.returnLoginStatus(Success));
-        
-        
+
+        System.out.println(
+                user.returnLoginStatus(
+                        loginUsername,
+                        loginPassword));
+
         input.close();
+        
     }
     //Username Validation
-    public boolean checkUsername(String username){
-    
-       return username.contains("_") && username.length() <= 5 ;
-    
-        
-    }
-
-    //Password Validation
-    public boolean checkPasswordComplexity(String password){
-       
-        boolean hasUppercase = password.matches(".*[A-Z].*");
-        boolean hasNumber = password.matches(".*\\d.*");
-        boolean hasSpecialChar = password.matches(".*[!@#$%^&*(),.?\\\":{}|<>].*");
-        return password.length() >= 8 && hasUppercase && hasNumber && hasSpecialChar;
-    }
-    
-    //Cellphone validation
-    public  boolean checkCellPhoneNumber(String Cellphone){
-        
-            return Cellphone.matches("^\\+27\\d{9}$");
-           
-    }
-    
-    //Registration 
-    public String registerUser(){
-    if(!checkUsername(registeredUsername)){
-        
-    return "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five character in length.";}
-    
-    else if(!checkPasswordComplexity(registeredPassword)){
- 
-        return "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.";}
-    
-    else if(!checkCellPhoneNumber(cellphone)){return "Cell phone number incorrectly formatted or does not contain international code.";}
-    
-    else{
-         
-          return " User registered successfully!";}
    
-    }
-    
-    //Login 
-    public  boolean loginUser(String Username, String Password){
-    return Username.equals(registeredUsername) && Password.equals(registeredPassword);}
-    
-    
-    //Login Status message
-    public  String returnLoginStatus(boolean Success){
-    if(Success){
-    return "Welcome" + firstName + "" + lastName + ", it is great to see you again.";}
-    else{ return "Username or password incorrect, please try again"; }}
+    public boolean checkUserName() {
 
-    public boolean checkUsername() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return userName.contains("_")
+                && userName.length() <= 5;
     }
-        
+
+    // Method 2
+    public boolean checkPasswordComplexity() {
+
+        boolean hasCapital =
+                password.matches(".*[A-Z].*");
+
+        boolean hasNumber =
+                password.matches(".*\\d.*");
+
+        boolean hasSpecial =
+                password.matches(".*[!@#$%^&*()].*");
+
+        boolean hasLength =
+                password.length() >= 8;
+
+        return hasCapital
+                && hasNumber
+                && hasSpecial
+                && hasLength;
+    }
+
+    // Method 3
+    public boolean checkCellPhoneNumber() {
+
+        return cellPhoneNumber.matches("^\\+27\\d{9}$");
+    }
+
+    // Method 4
+    public String registerUser() {
+
+        if (!checkUserName()) {
+
+            return "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.";
+        }
+
+        if (!checkPasswordComplexity()) {
+
+            return "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.";
+        }
+
+        if (!checkCellPhoneNumber()) {
+
+            return "Cell phone number incorrectly formatted or does not contain an international code.";
+        }
+
+        return "User successfully registered.";
+    }
+
+    // Method 5
+    public boolean loginUser(String enteredUserName,
+                             String enteredPassword) {
+
+        return userName.equals(enteredUserName)
+                && password.equals(enteredPassword);
+    }
+
+    // Method 6
+    public String returnLoginStatus(String enteredUserName,
+                                    String enteredPassword) {
+
+        if (loginUser(enteredUserName,
+                enteredPassword)) {
+
+            return "Welcome "
+                    + firstName
+                    + " "
+                    + lastName
+                    + ", it is great to see you again.";
+        }
+
+        return "Username or password incorrect, please try again.";
+    }
     
-}
+ }
+
