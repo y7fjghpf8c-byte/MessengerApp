@@ -3,24 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package Login;
-import java.util.Scanner;
-
 
 /**
- *
- * @author Makalabate Rampedi
+ * Registration and Login Class
+ * Author: Makalabate Rampedi
  */
-
-    
-    //Condtructor
 public class Login {
 
+    // User information
+    private String firstName;
+    private String lastName;
     private String userName;
     private String password;
     private String cellPhoneNumber;
-    private String firstName;
-    private String lastName;
 
+    /**
+     * Constructor
+     */
     public Login(String firstName,
                  String lastName,
                  String userName,
@@ -33,77 +32,24 @@ public class Login {
         this.password = password;
         this.cellPhoneNumber = cellPhoneNumber;
     }
+
     /**
-     * @param args the command line arguments
+     * Username must contain "_"
+     * and not exceed 5 characters
      */
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        
-        System.out.println("=== Registration ===");
-        
-        System.out.print("Enter First Name:");
-        String firstName = input.nextLine();
-        
-        System.out.print("Enter Last Name:");
-        String lastName = input.nextLine();
-        
-        System.out.print("Enter Username:");
-        String userName = input.nextLine();
-        
-        System.out.print("Enter Password:");
-        String password = input.nextLine();
-        
-        System.out.print("Enter South African Cellphone Number(+27):");
-        String cellPhoneNumber = input.nextLine();
-      
-          //Registration feedback
-        Login user = new Login(
-        firstName,
-        lastName,
-        userName,
-        password,
-        cellPhoneNumber);
-        
-          System.out.println(user.registerUser());
-
-        if (!user.registerUser()
-                .equals("User successfully registered.")) {
-            input.close();
-            return;
-        }
-        
-        
-        //Registration feedback
-       
-        
-        
-        //Login
-        
-        System.out.println("\n=== LOGIN ===");
-
-        System.out.print("Enter Username: ");
-        String loginUsername = input.nextLine();
-
-        System.out.print("Enter Password: ");
-        String loginPassword = input.nextLine();
-
-        System.out.println(
-                user.returnLoginStatus(
-                        loginUsername,
-                        loginPassword));
-
-        input.close();
-        
-    }
-    //Username Validation
-   
     public boolean checkUserName() {
 
         return userName.contains("_")
                 && userName.length() <= 5;
     }
 
-    // Method 2
+    /**
+     * Password Requirements:
+     * 8 characters minimum
+     * Capital letter
+     * Number
+     * Special character
+     */
     public boolean checkPasswordComplexity() {
 
         boolean hasCapital =
@@ -118,19 +64,24 @@ public class Login {
         boolean hasLength =
                 password.length() >= 8;
 
-        return hasCapital
-                && hasNumber
-                && hasSpecial
-                && hasLength;
+        return hasCapital &&
+               hasNumber &&
+               hasSpecial &&
+               hasLength;
     }
 
-    // Method 3
+    /**
+     * Validates SA number with
+     * international code
+     */
     public boolean checkCellPhoneNumber() {
 
         return cellPhoneNumber.matches("^\\+27\\d{9}$");
     }
 
-    // Method 4
+    /**
+     * Registration process
+     */
     public String registerUser() {
 
         if (!checkUserName()) {
@@ -151,19 +102,24 @@ public class Login {
         return "User successfully registered.";
     }
 
-    // Method 5
-    public boolean loginUser(String enteredUserName,
+    /**
+     * Checks login details
+     */
+    public boolean loginUser(String enteredUsername,
                              String enteredPassword) {
 
-        return userName.equals(enteredUserName)
+        return userName.equals(enteredUsername)
                 && password.equals(enteredPassword);
     }
 
-    // Method 6
-    public String returnLoginStatus(String enteredUserName,
+    /**
+     * Login feedback
+     */
+    public String returnLoginStatus(String enteredUsername,
                                     String enteredPassword) {
 
-        if (loginUser(enteredUserName,
+        if (loginUser(
+                enteredUsername,
                 enteredPassword)) {
 
             return "Welcome "
@@ -175,6 +131,4 @@ public class Login {
 
         return "Username or password incorrect, please try again.";
     }
-    
- }
-
+}

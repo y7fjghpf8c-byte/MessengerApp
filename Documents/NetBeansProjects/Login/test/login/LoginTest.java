@@ -4,19 +4,15 @@
  */
 package Login;
 
-import Login.Login;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-        
-
 
 /**
- *
- * @author Makalabate Rampedi
+ * Unit Tests for Login Class
+ * Author: Makalabate Rampedi
  */
 public class LoginTest {
 
-    // Username Correctly Formatted
     @Test
     public void testUserNameCorrectlyFormatted() {
 
@@ -30,7 +26,6 @@ public class LoginTest {
         assertTrue(login.checkUserName());
     }
 
-    // Username Incorrectly Formatted
     @Test
     public void testUserNameIncorrectlyFormatted() {
 
@@ -44,7 +39,6 @@ public class LoginTest {
         assertFalse(login.checkUserName());
     }
 
-    // Password Meets Complexity
     @Test
     public void testPasswordMeetsComplexity() {
 
@@ -58,7 +52,6 @@ public class LoginTest {
         assertTrue(login.checkPasswordComplexity());
     }
 
-    // Password Does Not Meet Complexity
     @Test
     public void testPasswordDoesNotMeetComplexity() {
 
@@ -72,7 +65,6 @@ public class LoginTest {
         assertFalse(login.checkPasswordComplexity());
     }
 
-    // Cell Number Correct
     @Test
     public void testCellPhoneNumberCorrectlyFormatted() {
 
@@ -86,7 +78,6 @@ public class LoginTest {
         assertTrue(login.checkCellPhoneNumber());
     }
 
-    // Cell Number Incorrect
     @Test
     public void testCellPhoneNumberIncorrectlyFormatted() {
 
@@ -100,45 +91,8 @@ public class LoginTest {
         assertFalse(login.checkCellPhoneNumber());
     }
 
-    // Login Successful
     @Test
-    public void testLoginSuccessful() {
-
-        Login login = new Login(
-                "Kyle",
-                "Smith",
-                "kyl_1",
-                "Ch&&sec@ke99!",
-                "+27838968976");
-
-        assertTrue(
-                login.loginUser(
-                        "kyl_1",
-                        "Ch&&sec@ke99!")
-        );
-    }
-
-    // Login Failed
-    @Test
-    public void testLoginFailed() {
-
-        Login login = new Login(
-                "Kyle",
-                "Smith",
-                "kyl_1",
-                "Ch&&sec@ke99!",
-                "+27838968976");
-
-        assertFalse(
-                login.loginUser(
-                        "wrongUser",
-                        "wrongPassword")
-        );
-    }
-
-    // Registration Success
-    @Test
-    public void testRegisterUser() {
+    public void testRegisterUserSuccess() {
 
         Login login = new Login(
                 "Kyle",
@@ -152,7 +106,38 @@ public class LoginTest {
                 login.registerUser());
     }
 
-    // Successful Login Message
+    @Test
+    public void testLoginSuccessful() {
+
+        Login login = new Login(
+                "Kyle",
+                "Smith",
+                "kyl_1",
+                "Ch&&sec@ke99!",
+                "+27838968976");
+
+        assertTrue(
+                login.loginUser(
+                        "kyl_1",
+                        "Ch&&sec@ke99!"));
+    }
+
+    @Test
+    public void testLoginFailed() {
+
+        Login login = new Login(
+                "Kyle",
+                "Smith",
+                "kyl_1",
+                "Ch&&sec@ke99!",
+                "+27838968976");
+
+        assertFalse(
+                login.loginUser(
+                        "wrongUser",
+                        "wrongPassword"));
+    }
+
     @Test
     public void testReturnLoginStatusSuccess() {
 
@@ -167,13 +152,11 @@ public class LoginTest {
                 "Welcome Kyle Smith, it is great to see you again.",
                 login.returnLoginStatus(
                         "kyl_1",
-                        "Ch&&sec@ke99!")
-        );
+                        "Ch&&sec@ke99!"));
     }
 
-    // Failed Login Message
     @Test
-    public void testReturnLoginStatusFailed() {
+    public void testReturnLoginStatusFailure() {
 
         Login login = new Login(
                 "Kyle",
@@ -186,7 +169,6 @@ public class LoginTest {
                 "Username or password incorrect, please try again.",
                 login.returnLoginStatus(
                         "wrongUser",
-                        "wrongPassword")
-        );
+                        "wrongPassword"));
     }
 }
