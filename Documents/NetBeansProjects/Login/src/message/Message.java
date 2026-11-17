@@ -153,23 +153,48 @@ private static int disregardCount = 0;
      */
     public String SentMessage(int option) {
 
-        switch(option) {
+    switch(option) {
 
-            case 1:
-                totalMessagesSent++;
-                return "Message successfully sent.";
+        case 1:
 
-            case 2:
-                return "Press 0 to delete the message.";
+            // Save sent message information
+            sentMessages[sentCount] = messageText;
+            recipients[sentCount] = recipientCell;
+            messageHashes[sentCount] = createMessageHash();
+            messageIDs[sentCount] = messageID;
 
-            case 3:
-                return "Message successfully stored.";
+            sentCount++;
+            totalMessagesSent++;
 
-            default:
-                return "Invalid option.";
-        }
+            return "Message successfully sent.";
+
+        case 2:
+
+            // Save disregarded message
+            disregardedMessages[disregardCount] =
+                    messageText;
+
+            disregardCount++;
+
+            return "Press 0 to delete the message.";
+
+        case 3:
+
+            // Save stored message information
+            storedMessages[storedCount] = messageText;
+            recipients[storedCount] = recipientCell;
+            messageHashes[storedCount] = createMessageHash();
+            messageIDs[storedCount] = messageID;
+
+            storedCount++;
+
+            return "Message successfully stored.";
+
+        default:
+
+            return "Invalid option.";
     }
-
+}
     public String getMessageID() {
         return messageID;
     }
