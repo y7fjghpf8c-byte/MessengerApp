@@ -11,6 +11,32 @@ import java.util.Random;
  * Handles message processing.
  */
 public class Message {
+    // ==========================================
+// PART 3 ARRAYS
+// ==========================================
+
+// Stores messages that were sent
+private static String[] sentMessages = new String[100];
+
+// Stores messages that were disregarded
+private static String[] disregardedMessages = new String[100];
+
+// Stores messages that were saved
+private static String[] storedMessages = new String[100];
+
+// Stores generated message hashes
+private static String[] messageHashes = new String[100];
+
+// Stores message IDs
+private static String[] messageIDs = new String[100];
+
+// Stores recipients for sent and stored messages
+private static String[] recipients = new String[100];
+
+// Counters to track array positions
+private static int sentCount = 0;
+private static int storedCount = 0;
+private static int disregardCount = 0;
 
     private String messageID;
     private String recipientCell;
