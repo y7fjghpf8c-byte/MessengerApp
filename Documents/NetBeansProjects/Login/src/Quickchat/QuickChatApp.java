@@ -135,9 +135,10 @@ public class QuickChatApp {
 
             System.out.println("\n===== QUICKCHAT MENU =====");
             System.out.println("1. Send Message");
-            System.out.println("2. Show Recently Sent Me*sages");
+            System.out.println("2. Show Recently Sent Messages");
             System.out.println("3. Stored Messages");
-            System.out.print("4. Quit");
+            System.out.println("4. Quit");
+            System.out.println("Select Option: ");
 
             int option =
                     Integer.parseInt(input.nextLine());
@@ -317,6 +318,19 @@ public class QuickChatApp {
                                 "Invalid selection.");
                 }
 
+                break;
+                
+                case 4:
+
+                  System.out.println(
+                          "Total Messages Sent: "
+                    + Message.returnTotalMessages());
+
+                  System.out.println(
+                          "Thank you for using QuickChat.");
+
+                          input.close();
+                         System.exit(0);
                 break;
             }
         }
