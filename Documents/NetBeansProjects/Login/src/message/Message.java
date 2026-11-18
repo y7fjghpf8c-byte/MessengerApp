@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Login;
+package Quickchat;
 
 import java.util.Random;
 
@@ -23,29 +23,22 @@ public class Message {
     // ======================================
 // PART 3 ARRAYS
 // ======================================
- 
 // Messages that were sent
 private static String[] sentMessages = new String[100];
- 
 // Messages that were stored
 private static String[] storedMessages = new String[100];
- 
 // Messages that were disregarded
-private static String[] disregardedMessages = new String[100];
- 
+private static String[] disregardMessages = new String[100];
 // Message hashes
 private static String[] messageHashes = new String[100];
- 
 // Message IDs
 private static String[] messageIDs = new String[100];
- 
 // Recipients
 private static String[] recipients = new String[100];
- 
 // Counters
 private static int sentCount = 0;
 private static int storedCount = 0;
-private static int disregardedCount = 0;
+private static int disregardCount = 0;
 
     /**
      * Constructor
@@ -173,7 +166,7 @@ private static int disregardedCount = 0;
         case 2:
 
             // Save disregarded message
-            disregardedMessages[disregardCount] =
+            disregardMessages[disregardCount] =
                     messageText;
 
             disregardCount++;
@@ -242,116 +235,115 @@ public static void displayStoredMessages() {
 /**
  * Finds the longest stored message.
  */
-public static String getLongestM*ssage() {
+public static String getLongestMessage() {
 
-    String longest = ""*
+    String longest = "";
 
-    for(int i = 0; i < storedCou*t; i++) {
+    for(int i = 0; i < storedCount; i++) {
 
-        if(storedMessag*s[i] != null &&
-           storedM*ssages[i].length() >
-           lo*gest.length()) {
+        if(storedMessages[i] != null &&
+           storedMessages[i].length() >
+           longest.length()) {
 
-            long*st = storedMessages[i];
+            longest = storedMessages[i];
         }
-*   }
+     }
 
     return longest;
 }
 
 /**
- * Searches for a message us*ng Message ID.
+ * Searches for a message using Message ID.
  */
-public static S*ring searchMessageID(String id) {
-*    for(int i = 0; i < storedCount* i++) {
+public static String searchMessageID(String id) {
+    for(int i = 0; i < storedCount; i++) {
 
-        if(messageIDs[i] *= null &&
-           messageIDs[i]*equals(id)) {
+        if(messageIDs[i] != null &&
+           messageIDs[i].equals(id)) {
 
-            return *Recipient: "
-                    +*recipients[i]
-                    * "\nMessage: "
-                   *+ storedMessages[i];
+            return "Recipient: "
+                    + recipients[i]
+                    + "\nMessage: "
+                    + storedMessages[i];
         }
-   *}
+   }
 
-    return "Message ID not foun*.";
+    return "Message ID not found.";
 }
 
 /**
- * Displays all *essages
- * for a specific recipien*.
+ * Displays all Messages
+ * for a specific recipient.
  */
-public static String searchR*cipient(String recipient) {
+public static String searchRecipient(String recipient) {
 
-    S*ring result = "";
+    String result = "";
 
-    for(int i =*0; i < storedCount; i++) {
+    for(int i = 0; i < storedCount; i++) {
 
-      * if(recipients[i] != null &&
-     *     recipients[i].equals(recipien*)) {
+       if(recipients[i] != null &&
+         recipients[i].equals(recipient)) {
 
-            result += stored*essages[i]
-                    + "*n";
+            result += storedMessages[i]
+                    + "\n";
         }
     }
 
-    return re*ult;
+    return result;
 }
 
 /**
- * Deletes a*message using
+ * Deletes a message using
  * a message hash.
  */
-public static String deleteByHas*(String hash) {
+public static String deleteByHash(String hash) {
 
-    for(int i = 0* i < storedCount; i++) {
+    for(int i = 0; i < storedCount; i++) {
 
-        *f(messageHashes[i] != null &&
-    *      messageHashes[i].equals(hash*) {
+        if(messageHashes[i] != null &&
+          messageHashes[i].equals(hash)) {
 
-            String deletedMes*age =
-                    storedMe*sages[i];
+            String deletedMessage =
+                    storedMessages[i];
 
-            storedMessa*es[i] = null;
+            storedMessages[i] = null;
 
-            return *Message: \""
-                    +*deletedMessage
-                   *+ "\" successfully deleted.";
-    *   }
+            return "Message: \""
+                    + deletedMessage
+                   + "\" successfully deleted.";
+       }
     }
 
-    return "Hash not f*und.";
+    return "Hash not found.";
 }
 
 /**
- * Displays a comp*ete report
- * of all stored messag*s.
+ * Displays a complete report
+ * of all stored messages.
  */
-public static void displayR*port() {
+public static void displayReport() {
 
-    System.out.println(
-*           "\n=== REPORT ===");
+    System.out.println( "\n=== REPORT ===");
 
- *  for(int i = 0; i < storedCount; *++) {
+    for(int i = 0; i < storedCount; i++) {
 
         if(storedMessages[i] != null) {
 
-            System.ou*.println(
-                    "Mes*age Hash: "
-                    + *essageHashes[i]);
+            System.out.println(
+                    "Message Hash: "
+                    + messageHashes[i]);
 
-            Sys*em.out.println(
-                  * "Recipient: "
-                   *+ recipients[i]);
+            System.out.println(
+                   "Recipient: "
+                   + recipients[i]);
 
-            Sys*em.out.println(
-                  * "Message: "
-                    +*storedMessages[i]);
+            System.out.println(
+                   "Message: "
+                    + storedMessages[i]);
 
-            S*stem.out.println(
-                *   "--------------------");
-      * }
+            System.out.println(
+                 "--------------------");
+        }
     }
 }
 }

@@ -4,15 +4,13 @@
  */
 package Quickchat;
 
-import Login.Login;
-import Login.Message;
 import java.util.Scanner;
 
 /**
  * QuickChat Main Application
  * Combines Part 1 (Registration and Login)
  * and Part 2 (Messaging System)
- *
+ * part 3
  * Author: Makalabate Rampedi
  */
 public class QuickChatApp {
@@ -26,7 +24,7 @@ public class QuickChatApp {
         // =========================================
 
         System.out.println("===== REGISTRATION =====");
-
+        
         // Capture user details
         System.out.print("Enter First Name: ");
         String firstName = input.nextLine();
@@ -99,27 +97,27 @@ public class QuickChatApp {
 
         // Required Part 3 Test Data
 
-new Message(
+        new Message(
         "+27834557896",
         "Did you get the cake?")
         .SentMessage(1);
 
-new Message(
+        new Message(
         "+27838884567",
         "Where are you? You are late! I have asked you to be on time.")
         .SentMessage(3);
 
-new Message(
+        new Message(
         "+27834484567",
         "Yohoooo, I am at your gate.")
         .SentMessage(2);
 
-new Message(
+        new Message(
         "0838884567",
         "It is dinner time!")
         .SentMessage(1);
 
-new Message(
+        new Message(
         "+27838884567",
         "Ok, I am leaving without you.")
         .SentMessage(3);
@@ -136,12 +134,10 @@ new Message(
         while (true) {
 
             System.out.println("\n===== QUICKCHAT MENU =====");
-            System.out.pr*ntln("1. Send Message");
-            System.ou*.println("2. Show Recently Sent Me*sages");
-            System.out.println("3. St*red Messages");
-            System.out.println*"4. Quit");
-
-            System.out.print("Select Option: ");
+            System.out.println("1. Send Message");
+            System.out.println("2. Show Recently Sent Me*sages");
+            System.out.println("3. Stored Messages");
+            System.out.print("4. Quit");
 
             int option =
                     Integer.parseInt(input.nextLine());
@@ -245,7 +241,7 @@ new Message(
                 // =====================
                 // EXIT APPLICATION
                 // =====================
-                 case 4:
+                 case 3:
 
                 System.out.println("\nSTORED MESSAGE MENU");
 
@@ -288,14 +284,12 @@ new Message(
 
                     case "d":
 
-                        System.out.print(
-                                "Enter Recipient: ");
+                        System.out.print("Enter Recipient: ");
 
-                        String recipient =
+                        String recipientSearch =
                                 input.nextLine();
 
-                        System.out.println(
-                                Message.searchRecipient(recipient));
+                        System.out.println(Message.searchRecipient(recipientSearch));
 
                         break;
 
