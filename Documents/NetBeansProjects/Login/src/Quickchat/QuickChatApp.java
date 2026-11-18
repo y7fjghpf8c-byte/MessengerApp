@@ -97,6 +97,32 @@ public class QuickChatApp {
 
         System.out.println("\nWelcome to QuickChat");
 
+        // Required Part 3 Test Data
+
+new Message(
+        "+27834557896",
+        "Did you get the cake?")
+        .SentMessage(1);
+
+new Message(
+        "+27838884567",
+        "Where are you? You are late! I have asked you to be on time.")
+        .SentMessage(3);
+
+new Message(
+        "+27834484567",
+        "Yohoooo, I am at your gate.")
+        .SentMessage(2);
+
+new Message(
+        "0838884567",
+        "It is dinner time!")
+        .SentMessage(1);
+
+new Message(
+        "+27838884567",
+        "Ok, I am leaving without you.")
+        .SentMessage(3);
         // Ask user how many messages they wish to send
         System.out.print(
                 "How many messages would you like to send? ");
@@ -110,9 +136,10 @@ public class QuickChatApp {
         while (true) {
 
             System.out.println("\n===== QUICKCHAT MENU =====");
-            System.out.println("1. Send Message");
-            System.out.println("2. Show Recently Sent Messages");
-            System.out.println("3. Quit");
+            System.out.pr*ntln("1. Send Message");
+            System.ou*.println("2. Show Recently Sent Me*sages");
+            System.out.println("3. St*red Messages");
+            System.out.println*"4. Quit");
 
             System.out.print("Select Option: ");
 
@@ -218,26 +245,85 @@ public class QuickChatApp {
                 // =====================
                 // EXIT APPLICATION
                 // =====================
-                case 3:
+                 case 4:
 
-                    System.out.println(
-                            "Total Messages Sent: "
-                            + Message.returnTotalMessages());
+                System.out.println("\nSTORED MESSAGE MENU");
 
-                    System.out.println(
-                            "Thank you for using QuickChat.");
+                System.out.println("a. Display Stored Messages");
+                System.out.println("b. Display Longest Message");
+                System.out.println("c. Search Message ID");
+                System.out.println("d. Search Recipient");
+                System.out.println("e. Delete Using Hash");
+                System.out.println("f. Display Report");
 
-                    input.close();
-                    System.exit(0);
-                    break;
+                String choice =
+                        input.nextLine();
 
-                // =====================
-                // INVALID OPTION
-                // =====================
-                default:
+                switch(choice.toLowerCase()) {
 
-                    System.out.println(
-                            "Invalid option. Please try again.");
+                    case "a":
+
+                        Message.displayStoredMessages();
+                        break;
+
+                    case "b":
+
+                        System.out.println(
+                                Message.getLongestMessage());
+
+                        break;
+
+                    case "c":
+
+                        System.out.print(
+                                "Enter Message ID: ");
+
+                        String id =
+                                input.nextLine();
+
+                        System.out.println(
+                                Message.searchMessageID(id));
+
+                        break;
+
+                    case "d":
+
+                        System.out.print(
+                                "Enter Recipient: ");
+
+                        String recipient =
+                                input.nextLine();
+
+                        System.out.println(
+                                Message.searchRecipient(recipient));
+
+                        break;
+
+                    case "e":
+
+                        System.out.print(
+                                "Enter Message Hash: ");
+
+                        String hash =
+                                input.nextLine();
+
+                        System.out.println(
+                                Message.deleteByHash(hash));
+
+                        break;
+
+                    case "f":
+
+                        Message.displayReport();
+                        break;
+
+                    default:
+
+                        System.out.println(
+                                "Invalid selection.");
+                }
+
+                break;
             }
         }
     }

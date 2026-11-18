@@ -11,32 +11,7 @@ import java.util.Random;
  * Handles message processing.
  */
 public class Message {
-    // ==========================================
-// PART 3 ARRAYS
-// ==========================================
-
-// Stores messages that were sent
-private static String[] sentMessages = new String[100];
-
-// Stores messages that were disregarded
-private static String[] disregardedMessages = new String[100];
-
-// Stores messages that were saved
-private static String[] storedMessages = new String[100];
-
-// Stores generated message hashes
-private static String[] messageHashes = new String[100];
-
-// Stores message IDs
-private static String[] messageIDs = new String[100];
-
-// Stores recipients for sent and stored messages
-private static String[] recipients = new String[100];
-
-// Counters to track array positions
-private static int sentCount = 0;
-private static int storedCount = 0;
-private static int disregardCount = 0;
+    
 
     private String messageID;
     private String recipientCell;
@@ -44,6 +19,33 @@ private static int disregardCount = 0;
     private int messageNumber;
 
     private static int totalMessagesSent = 0;
+    
+    // ======================================
+// PART 3 ARRAYS
+// ======================================
+ 
+// Messages that were sent
+private static String[] sentMessages = new String[100];
+ 
+// Messages that were stored
+private static String[] storedMessages = new String[100];
+ 
+// Messages that were disregarded
+private static String[] disregardedMessages = new String[100];
+ 
+// Message hashes
+private static String[] messageHashes = new String[100];
+ 
+// Message IDs
+private static String[] messageIDs = new String[100];
+ 
+// Recipients
+private static String[] recipients = new String[100];
+ 
+// Counters
+private static int sentCount = 0;
+private static int storedCount = 0;
+private static int disregardedCount = 0;
 
     /**
      * Constructor
@@ -194,7 +196,7 @@ private static int disregardCount = 0;
 
             return "Invalid option.";
     }
-}
+   }
     public String getMessageID() {
         return messageID;
     }
@@ -214,4 +216,142 @@ private static int disregardCount = 0;
     public static void resetTotalMessagesSent() {
         totalMessagesSent = 0;
     }
+    
+    /**
+ * Displays all stored messages.
+ */
+public static void displayStoredMessages() {
+
+    System.out.println("\n=== STORED MESSAGES ===");
+
+    for(int i = 0; i < storedCount; i++) {
+
+        System.out.println(
+                "Recipient: "
+                + recipients[i]);
+
+        System.out.println(
+                "Message: "
+                + storedMessages[i]);
+
+        System.out.println(
+                "--------------------");
+    }
+}
+
+/**
+ * Finds the longest stored message.
+ */
+public static String getLongestM*ssage() {
+
+    String longest = ""*
+
+    for(int i = 0; i < storedCou*t; i++) {
+
+        if(storedMessag*s[i] != null &&
+           storedM*ssages[i].length() >
+           lo*gest.length()) {
+
+            long*st = storedMessages[i];
+        }
+*   }
+
+    return longest;
+}
+
+/**
+ * Searches for a message us*ng Message ID.
+ */
+public static S*ring searchMessageID(String id) {
+*    for(int i = 0; i < storedCount* i++) {
+
+        if(messageIDs[i] *= null &&
+           messageIDs[i]*equals(id)) {
+
+            return *Recipient: "
+                    +*recipients[i]
+                    * "\nMessage: "
+                   *+ storedMessages[i];
+        }
+   *}
+
+    return "Message ID not foun*.";
+}
+
+/**
+ * Displays all *essages
+ * for a specific recipien*.
+ */
+public static String searchR*cipient(String recipient) {
+
+    S*ring result = "";
+
+    for(int i =*0; i < storedCount; i++) {
+
+      * if(recipients[i] != null &&
+     *     recipients[i].equals(recipien*)) {
+
+            result += stored*essages[i]
+                    + "*n";
+        }
+    }
+
+    return re*ult;
+}
+
+/**
+ * Deletes a*message using
+ * a message hash.
+ */
+public static String deleteByHas*(String hash) {
+
+    for(int i = 0* i < storedCount; i++) {
+
+        *f(messageHashes[i] != null &&
+    *      messageHashes[i].equals(hash*) {
+
+            String deletedMes*age =
+                    storedMe*sages[i];
+
+            storedMessa*es[i] = null;
+
+            return *Message: \""
+                    +*deletedMessage
+                   *+ "\" successfully deleted.";
+    *   }
+    }
+
+    return "Hash not f*und.";
+}
+
+/**
+ * Displays a comp*ete report
+ * of all stored messag*s.
+ */
+public static void displayR*port() {
+
+    System.out.println(
+*           "\n=== REPORT ===");
+
+ *  for(int i = 0; i < storedCount; *++) {
+
+        if(storedMessages[i] != null) {
+
+            System.ou*.println(
+                    "Mes*age Hash: "
+                    + *essageHashes[i]);
+
+            Sys*em.out.println(
+                  * "Recipient: "
+                   *+ recipients[i]);
+
+            Sys*em.out.println(
+                  * "Message: "
+                    +*storedMessages[i]);
+
+            S*stem.out.println(
+                *   "--------------------");
+      * }
+    }
+}
 }
