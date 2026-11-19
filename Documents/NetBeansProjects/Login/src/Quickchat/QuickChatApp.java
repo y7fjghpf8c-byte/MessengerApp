@@ -125,8 +125,19 @@ public class QuickChatApp {
         System.out.print(
                 "How many messages would you like to send? ");
 
+        String totalInput =
+        input.nextLine();
+
+        if(totalInput.isEmpty()) {
+
+         System.out.println(
+            "Please enter a valid number.");
+
+    return;
+    }
+
         int totalMessages =
-                Integer.parseInt(input.nextLine());
+          Integer.parseInt(totalInput);
 
         int messagesSent = 0;
 
@@ -139,10 +150,33 @@ public class QuickChatApp {
             System.out.println("3. Stored Messages");
             System.out.println("4. Quit");
             System.out.println("Select Option: ");
+            
+            
+                String optionInput =
+                        input.nextLine();
 
-            int option =
-                    Integer.parseInt(input.nextLine());
+                if(optionInput.isEmpty()) {
 
+                    System.out.println(
+                            "Please enter a menu option.");
+
+                    continue;
+                }
+
+                int option;
+
+                try {
+
+                    option =
+                            Integer.parseInt(optionInput);
+
+                } catch(NumberFormatException e) {
+
+                    System.out.println(
+                            "Invalid number entered.");
+
+                    continue;
+                }
             switch (option) {
 
                 // =====================
